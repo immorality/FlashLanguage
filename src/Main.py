@@ -1,7 +1,6 @@
-from generalStage import *
-from test.test import *
+# -*- coding: utf-8 -*-
 
-a = 5
-print(a + b)
-print(test(33))
+from generalStage import *
+
+generalStage.mainloop()
 
