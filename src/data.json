@@ -94,6 +94,21 @@
    "polish": "bubble", 
    "example": "sdqweqwe", 
    "english": "aab"
+  }, 
+  {
+   "polish": "autoritet", 
+   "example": "tesqwe", 
+   "english": "authority"
+  }, 
+  {
+   "polish": "street", 
+   "example": "spisok", 
+   "english": "bodyan"
+  }, 
+  {
+   "polish": "secret", 
+   "example": "qwedgqwe", 
+   "english": "behaviour"
   }
  ]
 }

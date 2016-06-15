@@ -19,6 +19,9 @@ class generalStage:
         self.customFont1 = tkFont.Font(family="Harrington", size=35)
         self.labelFlash = tk.Label(self.frame, text="FlashLanguage ", font=self.customFont1)
         self.table = Ttk.Treeview(self.frame, show="headings", selectmode="browse", height=16)
+        #self.scroll = Ttk.Scrollbar(self.frame)
+        #self.table.config(yscrollcommand=self.scroll.set)
+        #self.scroll.config(command = self.table)
         self.table["columns"] = ("one", "two", "tree")
         self.table.column("one", width=150)
         self.table.column("two", width=150)
@@ -31,10 +34,12 @@ class generalStage:
         self.exitButton = tk.Button(self.frame, text='Exit', width=25, command=self.exit, font=self.customFont)
         self.labelFlash.pack()
         self.table.pack(pady=10)
+        #self.scroll.pack(side="right")
         self.button1.pack()
         self.showButton.pack(pady=10)
         self.exitButton.pack()
         self.frame.pack()
+        self.showAllWords()
     def new_window(self):
         self.newWindow = tk.Toplevel(self.master)
         self.app = addWordStage(self.newWindow)
@@ -50,6 +55,7 @@ class generalStage:
     def refreshTable(self):
         self.clearTable()
         self.showAllWords()
+
 
     def clearTable(self):
         x = self.table.get_children()

@@ -11,7 +11,7 @@ class AutocompleteEntry(Entry):
             self.listboxLength = kwargs['listboxLength']
             del kwargs['listboxLength']
         else:
-            self.listboxLength = 8
+            self.listboxLength = 4
 
         # Entry font
         if 'font' in kwargs:
@@ -43,6 +43,7 @@ class AutocompleteEntry(Entry):
         self.var.trace('w', self.changed)
         self.bind("<Return>", self.selection)
         self.bind("<Right>", self.selection)
+        self.bind("<Escape>", self.destroyed)
         self.bind("<Up>", self.moveUp)
         self.bind("<Down>", self.moveDown)
 
@@ -55,6 +56,7 @@ class AutocompleteEntry(Entry):
                 self.listboxUp = False
         else:
             words = self.comparison()
+            print len(words)
             if words:
                 if not self.listboxUp:
                     self.listbox = Listbox(self.master, width=self["width"], height=self.listboxLength, font=self.customFonts)
@@ -64,12 +66,17 @@ class AutocompleteEntry(Entry):
                     self.listboxUp = True
 
                 self.listbox.delete(0, END)
+
                 for w in words:
-                    self.listbox.insert(END,w)
+                    self.listbox.insert(END, w)
             else:
                 if self.listboxUp:
                     self.listbox.destroy()
                     self.listboxUp = False
+    def destroyed(self, event):
+        if self.listboxUp:
+            self.listbox.destroy()
+            self.listboxUp = False
 
     def selection(self, event):
         if self.listboxUp:
@@ -111,6 +118,3 @@ class AutocompleteEntry(Entry):
     def comparison(self):
         return [ w for w in self.autocompleteList if self.matchesFunction(self.var.get(), w) ]
 
-
-
-   # entry = AutocompleteEntry(autocompleteList, root, listboxLength=6, width=32, matchesFunction=matches)
